@@ -86,7 +86,7 @@ bootstrap().then(async () => {
     console.error(ex);
 }).finally(async () => {
     if (outerBrowser) {
-        //await close(outerBrowser);
+        await close(outerBrowser);
     }
 
     process.exit(1);
