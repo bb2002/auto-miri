@@ -15,6 +15,5 @@ exports.miriLogin = async function(page) {
     await page.keyboard.type(MIRI_PASS);
 
     // 로그인 버튼 클릭
-    await page.click('#login_btn');
-    // await page.waitForNavigation();
+    await page.click('#login_btn', { waitUntil: 'networkidle2' });
 }

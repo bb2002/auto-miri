@@ -3,7 +3,7 @@ const { MIRI_ROOT } = require('./constant')
 
 exports.init = async function() {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
     });
 
     const page = await browser.newPage();

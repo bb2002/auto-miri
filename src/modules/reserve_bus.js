@@ -96,5 +96,9 @@ exports.reserveBus = async function(page) {
     }
 
     await page.waitForTimeout(500);
-    await page.click('#ui-container > div.bx-wrapper > div.bx-viewport > div > div:nth-child(1) > div.btns-footer > a', { waitUntil: 'networkidle2' });
+
+    // 예약 하기 누르기
+    await page.evaluate(() => {
+        goReservation();
+    })
 }
