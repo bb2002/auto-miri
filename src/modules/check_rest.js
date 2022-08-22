@@ -17,6 +17,8 @@ exports.checkReset = async function() {
         }
     }
 
+    console.log('URLRURLRULRURLURLURLURLURLR');
+    console.log(`http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?serviceKey=${API_KEY}`)
     const res = await axios.get(`http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?serviceKey=${API_KEY}`, {
         params: {
             solYear: targetDate.format('YYYY'),
