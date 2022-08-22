@@ -15,9 +15,10 @@ exports.checkReserve = async function(page, targetDate) {
             }
         }
     }
-    console.log('여기까지옴')
 
-    await page.waitForNavigation();
+    try {
+        await page.waitForNavigation();
+    } catch(ex){}
 
     {
         // 화면 캡쳐

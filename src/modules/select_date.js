@@ -7,7 +7,9 @@ exports.selectDate = async function(page) {
     try {
         await page.waitForNavigation();
     } catch(ex){}
-    await page.click('#ui-container > div.reservation_pac > div.reserChk-body > div.boarding-date > a > dl');
+    await page.evaluate(() => {
+        goCalendar();
+    })
     await page.waitForTimeout(500);
 
     // 예약 할 날짜 객체 생성
