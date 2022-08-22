@@ -4,7 +4,9 @@ exports.selectDate = async function(page) {
     const BUS_DATE = process.env.TARGET_BUS_DATE;
     const SEAT_PRIORITY = JSON.parse(process.env.SEAT_PRIORITY);
 
-    await page.waitForNavigation();
+    try {
+        await page.waitForNavigation();
+    } catch(ex){}
     await page.click('#ui-container > div.reservation_pac > div.reserChk-body > div.boarding-date > a > dl');
     await page.waitForTimeout(500);
 
