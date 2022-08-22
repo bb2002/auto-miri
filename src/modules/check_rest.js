@@ -24,6 +24,9 @@ exports.checkReset = async function() {
             solMonth: targetDate.format('MM'),
         }
     });
+    
+    console.log('res.data');
+    console.log(res.data);
 
     let restDays = [];
     {
