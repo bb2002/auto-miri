@@ -17,16 +17,12 @@ exports.checkReset = async function() {
         }
     }
 
-    const res = await axios.get(`http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo`, {
+    const res = await axios.get(`http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?serviceKey=${API_KEY}`, {
         params: {
-            serviceKey: API_KEY,
             solYear: targetDate.format('YYYY'),
             solMonth: targetDate.format('MM'),
         }
     });
-    
-    console.log('res.data');
-    console.log(res.data);
 
     let restDays = [];
     {
