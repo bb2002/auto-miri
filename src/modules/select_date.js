@@ -61,7 +61,7 @@ exports.selectDate = async function(page) {
 
                     await page.evaluate((seatIdx) => {
                         clickSeatValue(seatIdx - 1);
-                        // saveSeatCtrl();
+                        saveSeatCtrl();
                     }, seatIdx)
                     break;
                 }
