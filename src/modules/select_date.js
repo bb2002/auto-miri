@@ -53,7 +53,6 @@ exports.selectDate = async function(page) {
             const label = await page.evaluate(el => el.innerText, seat);
             if (label === `${seatIdx}`) {
                 const className = await page.evaluate(el => el.className, seat);
-                console.log(label, className);
 
                 if (className.indexOf('yourseat') === -1) {
                     // 해당 seatIdx 에 앉을 수 있음
@@ -62,7 +61,7 @@ exports.selectDate = async function(page) {
 
                     await page.evaluate((seatIdx) => {
                         clickSeatValue(seatIdx - 1);
-                        saveSeatCtrl();
+                        // saveSeatCtrl();
                     }, seatIdx)
                     break;
                 }

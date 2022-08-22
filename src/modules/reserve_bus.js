@@ -10,6 +10,13 @@ exports.reserveBus = async function(page) {
     await page.goto(MIRI_ROOT, { waitUntil: "networkidle2" });
 
     {
+        // 경고창이 뜨는 경우 닫기
+        try {
+            await page.click('#closePop4');
+        } catch(ex) {}
+    }
+
+    {
         // 버스 번호와 시간대 선택
         await page.click('#ui-container > div.bx-wrapper > div.bx-viewport > div > div:nth-child(1) > ul > li:nth-child(1) > a')
         await page.waitForTimeout(500);
