@@ -17,7 +17,7 @@ exports.checkReserve = async function(page, targetDate) {
     }
 
     try {
-        await page.waitForNavigation();
+        await page.waitForTimeout(10000);
     } catch(ex){}
 
     {
