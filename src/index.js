@@ -21,12 +21,15 @@ async function bootstrap() {
     const targetDate = moment().add(BUS_DATE, 'days');
 
     // 예약할 날짜가 휴일/공휴일인지 확인
-    {
+    try {
         const output = await checkReset();
         if (output.rest) {
             await sendMessage(`${targetDate.format('YYYY년 MM월 DD일')}은 ${output.reason}이므로, 예약을 하지 않았어요.`);
             return;
         }
+    } catch (ex) {
+        await sendMessage('공휴일 확인에 문제가 있었습니다. 무시하고 진행합니다.');
+        console.error(ex);
     }
     
     const { browser, page } = await init();
@@ -82,6 +85,9 @@ bootstrap().then(async () => {
     console.error('[AUTOMIRI] Jobs failed.');
     console.error(ex);
 }).finally(async () => {
-    await close(outerBrowser);
+    if (outerBrowser) {
+        await close(outerBrowser);
+    }
+
     process.exit(1);
 })
