@@ -16,5 +16,5 @@ exports.miriLogin = async function(page) {
 
     // 로그인 버튼 클릭
     await page.click('#login_btn');
-    await page.waitForNavigation();
+    // await page.waitForNavigation();
 }
