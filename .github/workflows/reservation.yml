@@ -5,7 +5,7 @@ name: Reservation bus
 # Controls when the workflow will run
 on:
   schedule:
-    - cron: '10 3 * * 1-5'
+    - cron: '6 3 * * 1-5'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,3 +32,13 @@ jobs:
       # Running reservation
       - name: npm run start
         run: npm run start
+        env:
+          MIRI_USER_EMAIL: ${{ secrets.MIRI_USER_EMAIL }}
+          MIRI_USER_PASS: ${{ secrets.MIRI_USER_PASS }}
+          REST_DATE_OPENAPI_KEY: ${{ secrets.REST_DATE_OPENAPI_KEY }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_CHANNEL: ${{ secrets.DISCORD_CHANNEL }}
+          TARGET_BUS_NUM: 3000
+          TARGET_BUS_TIME: '07:30'
+          TARGET_START_STAT_ID: 01125
+          TARGET_ARRIV_STAT_ID: 22997
