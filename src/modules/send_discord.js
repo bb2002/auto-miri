@@ -25,12 +25,11 @@ exports.sendMessage = async function(message, img) {
         client.channels.cache.get(CHANNEL_ID).send(message);
 
         if (img) {
-            const file = new AttachmentBuilder(img);
-            client.channels.cache.get(CHANNEL_ID).send({ files: [file] });
+            // 이미지가 있다면 이미지 추가 전달
+            const files = [new AttachmentBuilder(img)];
+            client.channels.cache.get(CHANNEL_ID).send({ files: files });
         }
 
         resolve()
     }))
-
-    
 }

@@ -21,8 +21,8 @@ exports.checkReserve = async function(page, targetDate) {
     {
         // 화면 캡쳐
         await page.screenshot({
-            type: 'jpeg',
-            path: `reserve_${targetDate.format('YYYYMMDD')}.jpeg`,
+            type: 'png',
+            path: `reserve_${targetDate.format('YYYYMMDD')}.png`,
             clip: {
                 x: 0,
                 y: 0,
@@ -32,5 +32,5 @@ exports.checkReserve = async function(page, targetDate) {
         })
     }
 
-    return `reserve_${targetDate.format('YYYYMMDD')}.jpeg`
+    return `reserve_${targetDate.format('YYYYMMDD')}.png`
 }

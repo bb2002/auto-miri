@@ -8,7 +8,10 @@ const { close } = require("./modules/close");
 const moment = require("moment");
 const path = require('path');
 const { initDiscord, sendMessage } = require("./modules/send_discord");
+const { Browser } = require("puppeteer");
 require('dotenv').config();
+
+let outerBrowser = null;
 
 async function bootstrap() {
     // discord 초기화
@@ -26,7 +29,8 @@ async function bootstrap() {
         }
     }
     
-    const { page } = await init();
+    const { browser, page } = await init();
+    outerBrowser = browser;
 
     // 로그인
     try {
@@ -36,7 +40,7 @@ async function bootstrap() {
         console.error(ex);
         return;
     }
-/*
+
     // 버스 예약
     try {
         await reserveBus(page);
@@ -55,27 +59,29 @@ async function bootstrap() {
         console.error(ex);
         return;
     }
-*/
-let rsIdx = 1;
+
     let resultFilePath = null;
     try {
-        resultFilePath = await checkReserve(page, targetDate);
+        const filename = await checkReserve(page, targetDate);
+        resultFilePath = path.join(__dirname, '../', filename);
     } catch(ex) {
         await sendMessage(`${targetDate.format('YYYY-MM-DD')} 확인 오류 -> ${rsIdx} 자리 예약 여부를 확인 할 수 없습니다.`);
         console.error(ex);
         return;
     }
 
-    // 저장 대기
-    await page.waitForTimeout(1000);
-
-    console.log(resultFilePath);
     await sendMessage(`${targetDate.format('YYYY-MM-DD')} 예약 완료~! ${rsIdx}번 자리를 예약했습니다.`, [
         resultFilePath
     ]);
-
-    //
-    //await close();
 }
 
-bootstrap()
+bootstrap().then(async () => {
+    // 프로그램이 성공적으로 종료 됨
+    console.log('[AUTOMIRI] Jobs completed.');
+}).catch(ex => {
+    console.error('[AUTOMIRI] Jobs failed.');
+    console.error(ex);
+}).finally(async () => {
+    await close(outerBrowser);
+    process.exit(1);
+})
