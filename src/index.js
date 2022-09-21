@@ -8,12 +8,20 @@ const { close } = require("./modules/close");
 const moment = require("moment");
 const path = require('path');
 const { initDiscord, sendMessage } = require("./modules/send_discord");
-const { Browser } = require("puppeteer");
 require('dotenv').config();
 
 let outerBrowser = null;
 
 async function bootstrap() {
+    const delayPromise = new Promise((resolve, reject) => {
+        const time = Math.floor(process.env.START_UP_DELAY * Math.random() * 1000);
+
+        setTimeout(() => {
+            resolve()
+        }, time);
+    });
+    await delayPromise;
+
     // discord 초기화
     await initDiscord();
 
@@ -63,7 +71,6 @@ async function bootstrap() {
         return;
     }
 
-    let rsIdx = -1;
     let resultFilePath = null;
     try {
         const filename = await checkReserve(page, targetDate);
