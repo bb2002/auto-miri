@@ -20,14 +20,15 @@ exports.initDiscord = async function() {
 exports.sendMessage = async function(message, img) {
     const CHANNEL_ID = process.env.DISCORD_CHANNEL;
 
-    await (new Promise((resolve, reject) => {
+    await (new Promise(async (resolve, reject) => {
         // 예약 메시지 전달
-        client.channels.cache.get(CHANNEL_ID).send(message);
+        const channel = await client.channels.fetch(CHANNEL_ID);
+        channel.send(message);
 
         if (img) {
             // 이미지가 있다면 이미지 추가 전달
             const files = [new AttachmentBuilder(img)];
-            client.channels.cache.get(CHANNEL_ID).send({ files: files });
+            channel.send({ files: files });
         }
 
         resolve()
