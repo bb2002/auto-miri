@@ -63,6 +63,7 @@ async function bootstrap() {
         return;
     }
 
+    let rsIdx = -1;
     let resultFilePath = null;
     try {
         const filename = await checkReserve(page, targetDate);
@@ -72,7 +73,6 @@ async function bootstrap() {
         console.error(ex);
         return;
     }
-    console.log(resultFilePath);
 
     await sendMessage(`${targetDate.format('YYYY-MM-DD')} 예약 완료~! ${rsIdx}번 자리를 예약했습니다.`, resultFilePath);
 }

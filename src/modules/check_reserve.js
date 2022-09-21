@@ -1,7 +1,22 @@
+const moment = require("moment");
 const { MIRI_RESERVATION } = require("./constant");
 
 exports.checkReserve = async function(page, targetDate) {
     await page.goto(MIRI_RESERVATION, { waitUntil: "networkidle2" });
+
+    {
+        // 만약 targetdate 가 다음달인경우
+        const today = moment();
+        if (targetDate.month() !== today.month()) {
+            await page.evaluate(() => {
+                setReservedDate(1);
+            });
+
+            try {
+                await page.waitForTimeout(3000);
+            } catch(ex){}
+        }
+    }
 
     {
         // 예약 날짜 확인
