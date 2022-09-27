@@ -10,10 +10,12 @@ exports.reserveBus = async function(page) {
     await page.goto(MIRI_ROOT, { waitUntil: "networkidle2" });
 
     {
-        // 경고창이 뜨는 경우 닫기
-        try {
-            await page.click('#closePop4');
-        } catch(ex) {}
+        // 경고창이 뜨는 경우 싹 닫기
+        for (let i = 0; i < 10; ++i) {
+            try {
+                await page.click(`#closePop${i}`);
+            } catch(ex){}
+        }
     }
 
     {

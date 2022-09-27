@@ -13,14 +13,14 @@ require('dotenv').config();
 let outerBrowser = null;
 
 async function bootstrap() {
-    const delayPromise = new Promise((resolve, reject) => {
-        const time = Math.floor(process.env.START_UP_DELAY * Math.random() * 1000);
+    // const delayPromise = new Promise((resolve, reject) => {
+    //     const time = Math.floor(process.env.START_UP_DELAY * Math.random() * 1000);
 
-        setTimeout(() => {
-            resolve()
-        }, time);
-    });
-    await delayPromise;
+    //     setTimeout(() => {
+    //         resolve()
+    //     }, time);
+    // });
+    //await delayPromise;
 
     // discord 초기화
     await initDiscord();
